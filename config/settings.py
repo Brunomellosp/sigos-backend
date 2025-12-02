@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 import os
+import dj_database_url
 from decouple import config
 from pathlib import Path
 
@@ -29,7 +30,7 @@ DEBUG = config('DEBUG', default=True, cast=bool)
 
 ALLOWED_HOSTS = ['sigos-backend.fly.dev', 'localhost', '127.0.0.1', '.vercel.app', '.now.sh', '127.0.0.1', 'localhost']
 
-CSRF_TRUSTED_ORIGINS = ['https://sigos-backend.fly.dev']
+CSRF_TRUSTED_ORIGINS = ['https://sigos-backend.fly.dev', 'https://sigos-backend.vercel.app']
 
 # Application definition
 INSTALLED_APPS = [
@@ -59,15 +60,15 @@ PASSWORD_HASHERS = [
 DJANGO_SALT = config('DJANGO_SALT', default='salt-fixo-para-testes-ABCD123456')
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DB_NAME', default='oss_db'),
-        'USER': config('DB_USER', default='postgres'),
-        'PASSWORD': config('DB_PASS', default='postgres'),
-        'HOST': config('DB_HOST', default='localhost'),
-        'PORT': config('DB_PORT', default='5432'),
-    }
+    'default': dj_database_url.config(
+        default=os.environ.get('DATABASE_URL'),
+        conn_max_age=600,
+        conn_health_checks=True,
+        ssl_require=True,
+    )
 }
+
+DATABASES['default']['DISABLE_SERVER_SIDE_CURSORS'] = True
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'core.pagination.CustomPagination',
