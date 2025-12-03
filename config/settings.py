@@ -72,7 +72,7 @@ DJANGO_SALT = config('DJANGO_SALT', default='salt-fixo-para-testes-ABCD123456')
 
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.environ.get('DATABASE_URL'),
+        default='postgres://postgres.phrtyatrzynfsfgaqodz:BrunoMello123@aws-1-sa-east-1.pooler.supabase.com:6543/postgres',
         conn_max_age=600,
         conn_health_checks=True,
         ssl_require=True,
@@ -163,7 +163,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = BASE_DIR / 'static'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
@@ -187,7 +187,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'brunopfc866@gmail.com')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', 'qxmb agfx xznh zgeh')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'caio.zampini@gmail.com')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', 'zbxf jzbu msih jlxk')
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
