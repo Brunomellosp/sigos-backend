@@ -59,6 +59,17 @@ PASSWORD_HASHERS = [
 
 DJANGO_SALT = config('DJANGO_SALT', default='salt-fixo-para-testes-ABCD123456')
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': config('DB_NAME', default='oss_db'),
+#         'USER': config('DB_USER', default='postgres'),
+#         'PASSWORD': config('DB_PASS', default='postgres'),
+#         'HOST': config('DB_HOST', default='localhost'),
+#         'PORT': config('DB_PORT', default='5432'),
+#     }
+# }
+
 DATABASES = {
     'default': dj_database_url.config(
         default=os.environ.get('DATABASE_URL'),
@@ -162,10 +173,21 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-EMAIL_BACKEND = 'core.email_backends.DirectMXEmailBackend'
+# EMAIL_BACKEND = 'core.email_backends.DirectMXEmailBackend'
 
-DEFAULT_FROM_EMAIL = 'nao-responda@sigos.com.br'
+# DEFAULT_FROM_EMAIL = 'nao-responda@sigos.com.br'
 
 PASSWORD_RESET_TIMEOUT = 3600 * 4  # 4 horas
 
 APPEND_SLASH=False
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'caio.zampini@gmail.com')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', 'zbxf jzbu msih jlxk')
+
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
