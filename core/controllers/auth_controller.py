@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.tokens import default_token_generator
 from django.shortcuts import get_object_or_404
-from django.db.models import Q  # 👈 IMPORTANTE
+from django.db.models import Q  
 
 from rest_framework import status, serializers
 from rest_framework.response import Response
