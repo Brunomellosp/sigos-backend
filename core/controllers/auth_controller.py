@@ -23,13 +23,7 @@ User = get_user_model()
 # LOGIN CASE-INSENSITIVE (username OU email)
 # =========================
 class CaseInsensitiveTokenSerializer(TokenObtainPairSerializer):
-    """
-    Login usando username OU email, ambos case-insensitive.
-    - Se o usuário foi cadastrado como 'GUSTAVO34', pode logar como:
-      'gustavo34', 'GUSTAVO34', 'GuStAvO34'
-    - Se o email é 'ADMIN@local.com', pode logar como:
-      'admin@local.com', 'ADMIN@LOCAL.COM', etc.
-    """
+
 
     def validate(self, attrs):
         login_value = attrs.get(self.username_field)  # por padrão "username"
